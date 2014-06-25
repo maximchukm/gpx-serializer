@@ -1,6 +1,6 @@
 apply plugin: 'java'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.6
 version = '1.0'
 
 repositories {
@@ -9,4 +9,5 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile group: 'org.simpleframework', name: 'simple-xml', version: '2.7.1'
 }
