@@ -16,7 +16,7 @@ public class TestPoint {
     @Lon
     private Double longitude;
 
-    @Height
+    @Altitude
     private Float height;
 
     @Time

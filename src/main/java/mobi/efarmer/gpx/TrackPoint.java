@@ -1,7 +1,7 @@
 package mobi.efarmer.gpx;
 
+import mobi.efarmer.gpx.annotations.Altitude;
 import mobi.efarmer.gpx.annotations.Direction;
-import mobi.efarmer.gpx.annotations.Height;
 import mobi.efarmer.gpx.annotations.Time;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
@@ -61,7 +61,7 @@ public class TrackPoint extends AbstractPoint {
     protected <T> void extractFieldValue(T point, Field field) throws IllegalAccessException {
         if (valueToPoint(Time.class, field, point, time)) return;
         if (valueToPoint(Direction.class, field, point, direction)) return;
-        if (valueToPoint(Height.class, field, point, height)) return;
+        if (valueToPoint(Altitude.class, field, point, height)) return;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class TrackPoint extends AbstractPoint {
             direction = dir;
             return;
         }
-        Float hg = (Float) valueFromPoint(Height.class, field, point);
+        Float hg = (Float) valueFromPoint(Altitude.class, field, point);
         if (hg != null) {
             height = hg;
             return;
