@@ -27,9 +27,8 @@ public class TrackSegment {
         this.points = points;
     }
 
-    public TrackSegment addPoint(TrackPoint point) {
+    public void addPoint(TrackPoint point) {
         getPoints().add(point);
-        return this;
     }
 
     public <T> void addPoints(List<T> points) {
@@ -41,4 +40,35 @@ public class TrackSegment {
             }
         }
     }
+
+    public static class Builder {
+
+        private Track track;
+        private TrackSegment segment;
+
+        public Builder(Track track) {
+            this.track = track;
+            segment = new TrackSegment();
+        }
+
+        public <T> Builder(Track track, List<T> trackPoints) {
+            this(track);
+            segment.addPoints(trackPoints);
+        }
+
+        public void commitSegment() {
+            track.getSegments().add(segment);
+        }
+
+        public <T> Builder addPoint(T point) {
+            if (point instanceof TrackPoint) {
+                segment.addPoint((TrackPoint)point);
+            } else {
+                segment.addPoint(new TrackPoint(point));
+            }
+            return this;
+        }
+
+    }
+
 }

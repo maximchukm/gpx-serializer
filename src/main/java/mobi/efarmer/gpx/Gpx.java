@@ -103,6 +103,10 @@ public class Gpx {
         getTracks().add(track);
     }
 
+    public Track.Builder newTrack() {
+        return new Track.Builder(this);
+    }
+
     public <T> Track.Builder newTrack(List<T> trackPoints) {
         return new Track.Builder(this, trackPoints);
     }

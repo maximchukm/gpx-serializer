@@ -62,13 +62,6 @@ public class Track {
         this.segments = segments;
     }
 
-    public <T> TrackSegment addSegment(List<T> points) {
-        TrackSegment segment = new TrackSegment();
-        segment.addPoints(points);
-        getSegments().add(segment);
-        return segment;
-    }
-
     public List<TrackPoint> getPoints() {
         List<TrackPoint> points = new ArrayList<TrackPoint>();
         for (TrackSegment segment : getSegments()) {
@@ -93,14 +86,26 @@ public class Track {
         private Gpx gpx;
         private Track track;
 
-        protected <T> Builder(Gpx gpx, List<T> trackPoints) {
+        protected Builder(Gpx gpx) {
             this.gpx = gpx;
             track = new Track();
-            track.addSegment(trackPoints);
         }
 
-        public void commit() {
+        protected <T> Builder(Gpx gpx, List<T> trackPoints) {
+            this(gpx);
+            newSegment(trackPoints).commitSegment();
+        }
+
+        public void commitTrack() {
             gpx.addTrack(track);
+        }
+
+        public TrackSegment.Builder newSegment() {
+            return new TrackSegment.Builder(track);
+        }
+
+        public <T> TrackSegment.Builder newSegment(List<T> trackPoints) {
+            return new TrackSegment.Builder(track, trackPoints);
         }
 
         public Builder name(String name) {

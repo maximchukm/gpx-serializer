@@ -75,7 +75,7 @@ public class GpxTest {
             points.add(point2);
             points.add(point3);
 
-            gpx.newTrack(points).name("Test track").src("JUnit test").commit();
+            gpx.newTrack(points).name("Test track").src("JUnit test").commitTrack();
 
             OutputStream os = new FileOutputStream("test.gpx");
             os.write(gpx.serialize());
@@ -93,12 +93,17 @@ public class GpxTest {
     public void testWriteCustomPoint() {
         try {
             Gpx gpx = new Gpx("testWriteCustomPoint");
+            Track.Builder trackBuilder = gpx.newTrack().name("Test track").src("JUnit test");
+            TrackSegment.Builder segmentBuilder = trackBuilder.newSegment();
+
             TestPoint point1 = new TestPoint();
             point1.setLatitude(43.43553);
             point1.setLongitude(42.32345);
             point1.setTime(new Date());
             point1.setDirection(23f);
             point1.setHeight(143.2233f);
+
+            segmentBuilder.addPoint(point1);
 
             TestPoint point2 = new TestPoint();
             point2.setLatitude(46.43553);
@@ -107,6 +112,8 @@ public class GpxTest {
             point2.setDirection(22f);
             point2.setHeight(149.2233f);
 
+            segmentBuilder.addPoint(point2);
+
             TestPoint point3 = new TestPoint();
             point3.setLatitude(48.43553);
             point3.setLongitude(42.32345);
@@ -114,12 +121,58 @@ public class GpxTest {
             point3.setDirection(21f);
             point3.setHeight(150.2233f);
 
-            List<TestPoint> points = new ArrayList<TestPoint>();
+            segmentBuilder.addPoint(point3);
+
+            segmentBuilder.commitSegment();
+            trackBuilder.commitTrack();
+
+            OutputStream os = new FileOutputStream("test.gpx");
+            os.write(gpx.serialize());
+            os.close();
+
+            checkGpx(Gpx.read(new File("test.gpx")));
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Assert.fail(ex.getMessage());
+        }
+    }
+
+    @Test
+    public void testAddSegmentWithPointList() {
+        try {
+            Gpx gpx = new Gpx("testWriteTrack");
+            Track.Builder builder = gpx.newTrack();
+
+            TrackPoint point1 = new TrackPoint();
+            point1.setLatitude(43.43553);
+            point1.setLongitude(42.32345);
+            point1.setTime(new Date());
+            point1.setDirection(23f);
+            point1.setHeight(143.2233f);
+
+            TrackPoint point2 = new TrackPoint();
+            point2.setLatitude(46.43553);
+            point2.setLongitude(42.32345);
+            point2.setTime(new Date());
+            point2.setDirection(22f);
+            point2.setHeight(149.2233f);
+
+            TrackPoint point3 = new TrackPoint();
+            point3.setLatitude(48.43553);
+            point3.setLongitude(42.32345);
+            point3.setTime(new Date());
+            point3.setDirection(21f);
+            point3.setHeight(150.2233f);
+
+            List<TrackPoint> points = new ArrayList<TrackPoint>();
             points.add(point1);
             points.add(point2);
             points.add(point3);
 
-            gpx.newTrack(points).commit();
+            builder.newSegment(points).commitSegment();
+            builder.name("Test track").src("JUnit test").commitTrack();
+
             OutputStream os = new FileOutputStream("test.gpx");
             os.write(gpx.serialize());
             os.close();
