@@ -75,9 +75,10 @@ public class GpxTest {
             points.add(point2);
             points.add(point3);
 
-            gpx.putTrackPoints(points);
+            gpx.newTrack(points).name("Test track").src("JUnit test").commit();
+
             OutputStream os = new FileOutputStream("test.gpx");
-            os.write(gpx.write());
+            os.write(gpx.serialize());
             os.close();
 
             checkGpx(Gpx.read(new File("test.gpx")));
@@ -118,9 +119,9 @@ public class GpxTest {
             points.add(point2);
             points.add(point3);
 
-            gpx.putTrackPoints(points);
+            gpx.newTrack(points).commit();
             OutputStream os = new FileOutputStream("test.gpx");
-            os.write(gpx.write());
+            os.write(gpx.serialize());
             os.close();
 
             checkGpx(Gpx.read(new File("test.gpx")));

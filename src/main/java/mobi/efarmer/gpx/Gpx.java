@@ -14,13 +14,11 @@ import java.util.List;
 @Root(strict = false)
 public class Gpx {
 
-    private Gpx gpx;
-
     @Attribute(required = false)
-    private String xmlns;
+    private String xmlns = "http://www.topografix.com/GPX/1/1";
 
     @Attribute
-    private String version;
+    private String version = "1.1";
 
     @Attribute
     private String creator;
@@ -29,8 +27,7 @@ public class Gpx {
     private List<Track> tracks;
 
     public Gpx() {
-        xmlns = "http://www.topografix.com/GPX/1/1";
-        version = "1.1";
+        super();
     }
 
     public Gpx(String creator) {
@@ -60,7 +57,7 @@ public class Gpx {
         return serializer.read(Gpx.class, gpxXml);
     }
 
-    public byte[] write() throws Exception {
+    public byte[] serialize() throws Exception {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
         new Persister().write(this, os);
         os.flush();
@@ -89,9 +86,7 @@ public class Gpx {
     public List<TrackPoint> getTrackPoints() throws Exception {
         List<TrackPoint> points = new ArrayList<TrackPoint>();
         for (Track track: tracks) {
-            for (TrackSegment segment : track.getSegments()) {
-                points.addAll(segment.getPoints());
-            }
+            points.addAll(track.getPoints());
         }
         return points;
     }
@@ -99,29 +94,17 @@ public class Gpx {
     public <T> List<T> getTrackPoints(Class<T> pointClass) throws Exception {
         List<T> points = new ArrayList<T>();
         for (Track track: tracks) {
-            for (TrackSegment segment : track.getSegments()) {
-                for (TrackPoint trackPoint : segment.getPoints()) {
-                    T point = trackPoint.extractPoint(pointClass);
-                    points.add(point);
-                }
-            }
+            points.addAll(track.getPoints(pointClass));
         }
         return points;
     }
 
-    public <T> Gpx putTrackPoints(List<T> trackPoints) {
-        if (!trackPoints.isEmpty()) {
-            TrackSegment trackSegment = new TrackSegment();
-            if (trackPoints.get(0).getClass() == TrackPoint.class) {
-                trackSegment.setPoints((List<TrackPoint>)trackPoints);
-            } else {
-                for (T point : trackPoints) {
-                    trackSegment.addPoint(new TrackPoint(point));
-                }
-            }
-            getTracks().add(new Track().addSegment(trackSegment));
-        }
-        return this;
+    public void addTrack(Track track) {
+        getTracks().add(track);
+    }
+
+    public <T> Track.Builder newTrack(List<T> trackPoints) {
+        return new Track.Builder(this, trackPoints);
     }
 
 }

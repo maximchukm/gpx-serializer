@@ -31,4 +31,14 @@ public class TrackSegment {
         getPoints().add(point);
         return this;
     }
+
+    public <T> void addPoints(List<T> points) {
+        if (points.get(0).getClass() == TrackPoint.class) {
+            setPoints((List<TrackPoint>) points);
+        } else {
+            for (T point : points) {
+                addPoint(new TrackPoint(point));
+            }
+        }
+    }
 }
