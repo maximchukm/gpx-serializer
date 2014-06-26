@@ -1,8 +1,8 @@
 package mobi.efarmer.gpx;
 
-import mobi.efarmer.gpx.annotations.Altitude;
-import mobi.efarmer.gpx.annotations.Direction;
-import mobi.efarmer.gpx.annotations.Time;
+import mobi.efarmer.gpx.annotation.Altitude;
+import mobi.efarmer.gpx.annotation.Direction;
+import mobi.efarmer.gpx.annotation.Time;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 

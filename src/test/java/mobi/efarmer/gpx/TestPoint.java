@@ -1,6 +1,6 @@
 package mobi.efarmer.gpx;
 
-import mobi.efarmer.gpx.annotations.*;
+import mobi.efarmer.gpx.annotation.*;
 
 import java.util.Date;
 

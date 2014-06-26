@@ -1,7 +1,7 @@
 package mobi.efarmer.gpx;
 
-import mobi.efarmer.gpx.annotations.Lat;
-import mobi.efarmer.gpx.annotations.Lon;
+import mobi.efarmer.gpx.annotation.Lat;
+import mobi.efarmer.gpx.annotation.Lon;
 import org.simpleframework.xml.Attribute;
 
 import java.lang.annotation.Annotation;
