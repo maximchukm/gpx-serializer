@@ -54,21 +54,21 @@ public class GpxTest {
             point1.setLongitude(42.32345);
             point1.setTime(new Date());
             point1.setDirection(23f);
-            point1.setHeight(143.2233f);
+            point1.setHeight(143.2233);
 
             TrackPoint point2 = new TrackPoint();
             point2.setLatitude(46.43553);
             point2.setLongitude(42.32345);
             point2.setTime(new Date());
             point2.setDirection(22f);
-            point2.setHeight(149.2233f);
+            point2.setHeight(149.2233);
 
             TrackPoint point3 = new TrackPoint();
             point3.setLatitude(48.43553);
             point3.setLongitude(42.32345);
             point3.setTime(new Date());
             point3.setDirection(21f);
-            point3.setHeight(150.2233f);
+            point3.setHeight(150.2233);
 
             List<TrackPoint> points = new ArrayList<TrackPoint>();
             points.add(point1);
@@ -101,7 +101,7 @@ public class GpxTest {
             point1.setLongitude(42.32345);
             point1.setTime(new Date());
             point1.setDirection(23f);
-            point1.setHeight(143.2233f);
+            point1.setHeight(143.2233);
 
             segmentBuilder.addPoint(point1);
 
@@ -110,7 +110,7 @@ public class GpxTest {
             point2.setLongitude(42.32345);
             point2.setTime(new Date());
             point2.setDirection(22f);
-            point2.setHeight(149.2233f);
+            point2.setHeight(149.2233);
 
             segmentBuilder.addPoint(point2);
 
@@ -119,7 +119,7 @@ public class GpxTest {
             point3.setLongitude(42.32345);
             point3.setTime(new Date());
             point3.setDirection(21f);
-            point3.setHeight(150.2233f);
+            point3.setHeight(150.2233);
 
             segmentBuilder.addPoint(point3);
 
@@ -149,21 +149,21 @@ public class GpxTest {
             point1.setLongitude(42.32345);
             point1.setTime(new Date());
             point1.setDirection(23f);
-            point1.setHeight(143.2233f);
+            point1.setHeight(143.2233);
 
             TrackPoint point2 = new TrackPoint();
             point2.setLatitude(46.43553);
             point2.setLongitude(42.32345);
             point2.setTime(new Date());
             point2.setDirection(22f);
-            point2.setHeight(149.2233f);
+            point2.setHeight(149.2233);
 
             TrackPoint point3 = new TrackPoint();
             point3.setLatitude(48.43553);
             point3.setLongitude(42.32345);
             point3.setTime(new Date());
             point3.setDirection(21f);
-            point3.setHeight(150.2233f);
+            point3.setHeight(150.2233);
 
             List<TrackPoint> points = new ArrayList<TrackPoint>();
             points.add(point1);

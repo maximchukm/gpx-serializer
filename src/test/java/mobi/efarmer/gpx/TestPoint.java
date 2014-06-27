@@ -17,7 +17,7 @@ public class TestPoint {
     private Double longitude;
 
     @Altitude
-    private Float height;
+    private Double height;
 
     @Time
     private Date time;
@@ -41,11 +41,11 @@ public class TestPoint {
         this.longitude = longitude;
     }
 
-    public Float getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(Float height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 

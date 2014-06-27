@@ -23,7 +23,7 @@ public class TrackPoint extends AbstractPoint {
     private Float direction;
 
     @Element(name = "geoidheight", required = false)
-    private Float height;
+    private Double height;
 
     public TrackPoint() {
         super();
@@ -49,11 +49,11 @@ public class TrackPoint extends AbstractPoint {
         this.direction = direction;
     }
 
-    public Float getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(Float height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 
@@ -76,7 +76,7 @@ public class TrackPoint extends AbstractPoint {
             direction = dir;
             return;
         }
-        Float hg = (Float) valueFromPoint(Altitude.class, field, point);
+        Double hg = (Double) valueFromPoint(Altitude.class, field, point);
         if (hg != null) {
             height = hg;
             return;
