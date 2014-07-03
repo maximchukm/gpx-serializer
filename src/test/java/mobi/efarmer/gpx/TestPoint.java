@@ -10,10 +10,10 @@ import java.util.Date;
  */
 public class TestPoint {
 
-    @Lat
+    @Latitude
     private Double latitude;
 
-    @Lon
+    @Longitude
     private Double longitude;
 
     @Altitude
@@ -23,7 +23,13 @@ public class TestPoint {
     private Date time;
 
     @Direction
-    private Float direction;
+    private Double direction;
+
+    @Speed
+    private Double speed;
+
+    @Sattelites
+    private Integer sattelites;
 
     public Double getLatitude() {
         return latitude;
@@ -57,11 +63,27 @@ public class TestPoint {
         this.time = time;
     }
 
-    public Float getDirection() {
+    public Double getDirection() {
         return direction;
     }
 
-    public void setDirection(Float direction) {
+    public void setDirection(Double direction) {
         this.direction = direction;
+    }
+
+    public Double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Double speed) {
+        this.speed = speed;
+    }
+
+    public Integer getSattelites() {
+        return sattelites;
+    }
+
+    public void setSattelites(Integer sattelites) {
+        this.sattelites = sattelites;
     }
 }

@@ -1,13 +1,12 @@
 package mobi.efarmer.gpx;
 
-import mobi.efarmer.gpx.annotation.Altitude;
-import mobi.efarmer.gpx.annotation.Direction;
-import mobi.efarmer.gpx.annotation.Time;
+import mobi.efarmer.gpx.annotation.Speed;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Namespace;
+import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
 
 import java.lang.reflect.Field;
-import java.util.Date;
 
 /**
  * @author Maxim Maximchuk
@@ -16,14 +15,10 @@ import java.util.Date;
 @Root(name = "trkpt", strict = false)
 public class TrackPoint extends AbstractPoint {
 
-    @Element(name = "time", required = false)
-    private Date time;
-
-    @Element(name = "magvar", required = false)
-    private Float direction;
-
-    @Element(name = "geoidheight", required = false)
-    private Double height;
+    @Path("extensions")
+    @Namespace(prefix = "ef", reference = "http://efarmer.mobi/GPX/1/0")
+    @Element(name = "speed", required = false)
+    private Double speed;
 
     public TrackPoint() {
         super();
@@ -33,53 +28,24 @@ public class TrackPoint extends AbstractPoint {
         super(point);
     }
 
-    public Date getTime() {
-        return time;
+    public Double getSpeed() {
+        return speed;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
-    public Float getDirection() {
-        return direction;
-    }
-
-    public void setDirection(Float direction) {
-        this.direction = direction;
-    }
-
-    public Double getHeight() {
-        return height;
-    }
-
-    public void setHeight(Double height) {
-        this.height = height;
+    public void setSpeed(Double speed) {
+        this.speed = speed;
     }
 
     @Override
     protected <T> void extractFieldValue(T point, Field field) throws IllegalAccessException {
-        if (valueToPoint(Time.class, field, point, time)) return;
-        if (valueToPoint(Direction.class, field, point, direction)) return;
-        if (valueToPoint(Altitude.class, field, point, height)) return;
+        if (valueToPoint(Speed.class, field, point, speed)) return;
     }
 
     @Override
     protected <T> void putFieldValue(T point, Field field) throws IllegalAccessException {
-        Date tm = (Date) valueFromPoint(Time.class, field, point);
-        if (tm != null) {
-            time = tm;
-            return;
-        }
-        Float dir = (Float) valueFromPoint(Direction.class, field, point);
-        if (dir != null) {
-            direction = dir;
-            return;
-        }
-        Double hg = (Double) valueFromPoint(Altitude.class, field, point);
-        if (hg != null) {
-            height = hg;
-            return;
+        Double sp = (Double) valueFromPoint(Speed.class, field, point);
+        if (sp != null) {
+            speed = sp;
         }
     }
 

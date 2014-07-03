@@ -96,8 +96,9 @@ public class Track {
             newSegment(trackPoints).commitSegment();
         }
 
-        public void commitTrack() {
+        public Track commitTrack() {
             gpx.addTrack(track);
+            return track;
         }
 
         public TrackSegment.Builder newSegment() {

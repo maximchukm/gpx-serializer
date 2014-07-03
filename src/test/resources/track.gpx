@@ -1,27 +1,38 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" creator="RouteConverter">
-    <metadata>
-        <name>Test file by Patrick</name>
-    </metadata>
-    <trk>
-        <name>Patrick's Track</name>        
-		<trkseg>
-            <trkpt lon="9.860624216140083" lat="54.9328621088893">
-                <ele>0.0</ele>
-                <name>Position 1</name>
-            </trkpt>
-            <trkpt lon="9.86092208681491" lat="54.93293237320851">
-                <ele>0.0</ele>
-                <name>Position 2</name>
-            </trkpt>
-            <trkpt lon="9.86187816543752" lat="54.93327743521187">
-                <ele>0.0</ele>
-                <name>Position 3</name>
-            </trkpt>
-            <trkpt lon="9.862439849679859" lat="54.93342326167919">
-                <ele>0.0</ele>
-                <name>Position 4</name>
-            </trkpt>
-        </trkseg>
-    </trk>
+<gpx xmlns="http://www.topografix.com/GPX/1/1"
+	 xmlns:ef="http://efarmer.mobi/GPX/1/0"
+	 version="1.1" creator="testWriteTrack">
+   <trk>
+      <name>Test track</name>
+      <src>JUnit test</src>
+	  <type>content://DAYBOOK_OPERATION/Fec752f73-e5f5-448f-ab94-08937cd78b61</type>
+      <trkseg>
+         <trkpt lat="43.43553" lon="42.32345">
+            <time>2014-06-26 12:11:33.103 EEST</time>
+            <magvar>23.0</magvar>
+            <geoidheight>143.2233</geoidheight>
+			<sat>8</sat>
+            <extensions>
+                <ef:speed>45</ef:speed>
+            </extensions>
+         </trkpt>
+         <trkpt lat="46.43553" lon="42.32345">
+            <time>2014-06-26 12:11:33.103 EEST</time>
+            <magvar>22.0</magvar>
+            <geoidheight>149.2233</geoidheight>
+			<sat>6</sat>
+            <extensions>
+                <ef:speed>50</ef:speed>
+            </extensions>
+         </trkpt>
+         <trkpt lat="48.43553" lon="42.32345">
+            <time>2014-06-26 12:11:33.103 EEST</time>
+            <magvar>21.0</magvar>
+            <geoidheight>150.2233</geoidheight>
+			<sat>7</sat>
+            <extensions>
+                <ef:speed>30</ef:speed>
+            </extensions>
+         </trkpt>
+      </trkseg>
+   </trk>
 </gpx>

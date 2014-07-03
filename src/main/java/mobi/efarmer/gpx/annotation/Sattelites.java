@@ -7,9 +7,9 @@ import java.lang.annotation.Target;
 
 /**
  * @author Maxim Maximchuk
- *         date 25-Jun-14.
+ *         date 27-Jun-14.
  */
-@Target(value = ElementType.FIELD)
-@Retention(value = RetentionPolicy.RUNTIME)
-public @interface Lon {
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Sattelites {
 }

@@ -53,21 +53,22 @@ public class GpxTest {
             point1.setLatitude(43.43553);
             point1.setLongitude(42.32345);
             point1.setTime(new Date());
-            point1.setDirection(23f);
+            point1.setDirection(23d);
             point1.setHeight(143.2233);
+            point1.setSpeed(45d);
 
             TrackPoint point2 = new TrackPoint();
             point2.setLatitude(46.43553);
             point2.setLongitude(42.32345);
             point2.setTime(new Date());
-            point2.setDirection(22f);
+            point2.setDirection(22d);
             point2.setHeight(149.2233);
 
             TrackPoint point3 = new TrackPoint();
             point3.setLatitude(48.43553);
             point3.setLongitude(42.32345);
             point3.setTime(new Date());
-            point3.setDirection(21f);
+            point3.setDirection(21d);
             point3.setHeight(150.2233);
 
             List<TrackPoint> points = new ArrayList<TrackPoint>();
@@ -100,8 +101,10 @@ public class GpxTest {
             point1.setLatitude(43.43553);
             point1.setLongitude(42.32345);
             point1.setTime(new Date());
-            point1.setDirection(23f);
+            point1.setDirection(23d);
             point1.setHeight(143.2233);
+            point1.setSpeed(65d);
+            point1.setSattelites(6);
 
             segmentBuilder.addPoint(point1);
 
@@ -109,8 +112,9 @@ public class GpxTest {
             point2.setLatitude(46.43553);
             point2.setLongitude(42.32345);
             point2.setTime(new Date());
-            point2.setDirection(22f);
+            point2.setDirection(22d);
             point2.setHeight(149.2233);
+            point2.setSattelites(4);
 
             segmentBuilder.addPoint(point2);
 
@@ -118,8 +122,10 @@ public class GpxTest {
             point3.setLatitude(48.43553);
             point3.setLongitude(42.32345);
             point3.setTime(new Date());
-            point3.setDirection(21f);
+            point3.setDirection(21d);
             point3.setHeight(150.2233);
+            point3.setSpeed(45d);
+            point3.setSattelites(5);
 
             segmentBuilder.addPoint(point3);
 
@@ -148,21 +154,21 @@ public class GpxTest {
             point1.setLatitude(43.43553);
             point1.setLongitude(42.32345);
             point1.setTime(new Date());
-            point1.setDirection(23f);
+            point1.setDirection(23d);
             point1.setHeight(143.2233);
 
             TrackPoint point2 = new TrackPoint();
             point2.setLatitude(46.43553);
             point2.setLongitude(42.32345);
             point2.setTime(new Date());
-            point2.setDirection(22f);
+            point2.setDirection(22d);
             point2.setHeight(149.2233);
 
             TrackPoint point3 = new TrackPoint();
             point3.setLatitude(48.43553);
             point3.setLongitude(42.32345);
             point3.setTime(new Date());
-            point3.setDirection(21f);
+            point3.setDirection(21d);
             point3.setHeight(150.2233);
 
             List<TrackPoint> points = new ArrayList<TrackPoint>();

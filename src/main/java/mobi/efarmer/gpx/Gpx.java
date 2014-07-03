@@ -1,10 +1,16 @@
 package mobi.efarmer.gpx;
 
+import mobi.efarmer.gpx.transform.GpxDateTransform;
 import org.simpleframework.xml.*;
 import org.simpleframework.xml.core.Persister;
+import org.simpleframework.xml.transform.RegistryMatcher;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,19 +18,22 @@ import java.util.List;
  *         date 24-Jun-14.
  */
 @Root(strict = false)
+@NamespaceList(value = {
+    @Namespace(reference = "http://www.topografix.com/GPX/1/1"),
+    @Namespace(prefix = "ef", reference = "http://efarmer.mobi/GPX/1/0")
+})
 public class Gpx {
 
+    @Version(revision=1.1)
+    private double version;
+
     @Attribute(required = false)
-    private String xmlns = "http://www.topografix.com/GPX/1/1";
-
-    @Attribute
-    private String version = "1.1";
-
-    @Attribute
     private String creator;
 
     @ElementList(name = "trk", inline = true)
     private List<Track> tracks;
+
+    private static Persister persister;
 
     public Gpx() {
         super();
@@ -53,13 +62,12 @@ public class Gpx {
     }
 
     public static Gpx read(String gpxXml) throws Exception {
-        Serializer serializer = new Persister();
-        return serializer.read(Gpx.class, gpxXml);
+        return getPersister().read(Gpx.class, gpxXml);
     }
 
     public byte[] serialize() throws Exception {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        new Persister().write(this, os);
+        getPersister().write(this, os);
         os.flush();
         return os.toByteArray();
     }
@@ -109,6 +117,15 @@ public class Gpx {
 
     public <T> Track.Builder newTrack(List<T> trackPoints) {
         return new Track.Builder(this, trackPoints);
+    }
+
+    private static Persister getPersister() {
+        if (persister == null) {
+            RegistryMatcher m = new RegistryMatcher();
+            m.bind(Date.class, new GpxDateTransform());
+            persister = new Persister(m);
+        }
+        return persister;
     }
 
 }

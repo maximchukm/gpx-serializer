@@ -56,8 +56,9 @@ public class TrackSegment {
             segment.addPoints(trackPoints);
         }
 
-        public void commitSegment() {
+        public TrackSegment commitSegment() {
             track.getSegments().add(segment);
+            return segment;
         }
 
         public <T> Builder addPoint(T point) {

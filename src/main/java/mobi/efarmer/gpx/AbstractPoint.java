@@ -1,11 +1,12 @@
 package mobi.efarmer.gpx;
 
-import mobi.efarmer.gpx.annotation.Lat;
-import mobi.efarmer.gpx.annotation.Lon;
+import mobi.efarmer.gpx.annotation.*;
 import org.simpleframework.xml.Attribute;
+import org.simpleframework.xml.Element;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Date;
 
 /**
  * @author Maxim Maximchuk
@@ -19,21 +20,85 @@ public abstract class AbstractPoint {
     @Attribute(name = "lon")
     private Double longitude;
 
+    @Element(name = "time", required = false)
+    private Date time;
+
+    @Element(name = "magvar", required = false)
+    private Double direction;
+
+    @Element(name = "geoidheight", required = false)
+    private Double height;
+
+    @Element(name = "sat", required = false)
+    private Integer sattelites;
+
     protected AbstractPoint() {
         super();
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public Double getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Double direction) {
+        this.direction = direction;
+    }
+
+    public Double getHeight() {
+        return height;
+    }
+
+    public void setHeight(Double height) {
+        this.height = height;
+    }
+
+    public Integer getSattelites() {
+        return sattelites;
+    }
+
+    public void setSattelites(Integer sattelites) {
+        this.sattelites = sattelites;
     }
 
     protected <T> AbstractPoint(T point) {
         try {
             for (Field field : point.getClass().getDeclaredFields()) {
-                Double lat = (Double) valueFromPoint(Lat.class, field, point);
+                Double lat = (Double) valueFromPoint(Latitude.class, field, point);
                 if (lat != null) {
                     setLatitude(lat);
                     continue;
                 }
-                Double lon = (Double) valueFromPoint(Lon.class, field, point);
+                Double lon = (Double) valueFromPoint(Longitude.class, field, point);
                 if (lon != null) {
                     setLongitude(lon);
+                    continue;
+                }
+                Date tm = (Date) valueFromPoint(Time.class, field, point);
+                if (tm != null) {
+                    setTime(tm);
+                    continue;
+                }
+                Double dir = (Double) valueFromPoint(Direction.class, field, point);
+                if (dir != null) {
+                    setDirection(dir);
+                    continue;
+                }
+                Double hg = (Double) valueFromPoint(Altitude.class, field, point);
+                if (hg != null) {
+                    setHeight(hg);
+                    continue;
+                }
+                Integer sat = (Integer) valueFromPoint(Sattelites.class, field, point);
+                if (sat != null) {
+                    setSattelites(sat);
                     continue;
                 }
                 putFieldValue(point, field);
@@ -60,7 +125,6 @@ public abstract class AbstractPoint {
     }
 
     protected static <T, I extends AbstractPoint> I buildPoint(I instance, T point) {
-
         return instance;
     }
 
@@ -69,8 +133,11 @@ public abstract class AbstractPoint {
         try {
             point = pointClass.newInstance();
             for (Field field: pointClass.getDeclaredFields()) {
-                if (valueToPoint(Lat.class, field, point, latitude)) continue;
-                if (valueToPoint(Lon.class, field, point, longitude)) continue;
+                if (valueToPoint(Latitude.class, field, point, latitude)) continue;
+                if (valueToPoint(Longitude.class, field, point, longitude)) continue;
+                if (valueToPoint(Time.class, field, point, time)) continue;
+                if (valueToPoint(Direction.class, field, point, direction)) continue;
+                if (valueToPoint(Altitude.class, field, point, height)) continue;
                 extractFieldValue(point, field);
             }
         } catch (InstantiationException e) {
