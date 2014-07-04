@@ -15,13 +15,20 @@ dependencies {
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        maven(MavenPublication) {
+            groupId 'mobi.efarmer.gpx'
+            artifactId 'gpx-serializer'
+
             from components.java
         }
     }
     repositories {
         maven {
-            url "$buildDir/repo"
+            url mavenInternalRepo
+            credentials {
+                username mavenUser
+                password mavenPassword
+            }
         }
     }
 }
